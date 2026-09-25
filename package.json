@@ -1,0 +1,16 @@
+{
+  "name": "support-ticket-system",
+  "version": "1.0.0",
+  "description": "Full Stack Support Ticket Management System (React, Node.js, Express, MySQL)",
+  "scripts": {
+    "test": "npm --prefix backend test",
+    "db:init": "npm --prefix backend run db:init",
+    "backend": "npm --prefix backend start",
+    "backend:dev": "npm --prefix backend run dev",
+    "frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build"
+  },
+  "keywords": ["support-ticket", "react", "express", "mysql", "jest", "postman"],
+  "author": "Junior Full Stack Developer",
+  "license": "ISC"
+}
