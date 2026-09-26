@@ -2,6 +2,11 @@ const mysql = require('mysql2/promise');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
+const isRemoteHost = process.env.DB_HOST && process.env.DB_HOST !== 'localhost' && process.env.DB_HOST !== '127.0.0.1';
+const ssl = (process.env.DB_SSL === 'true' || isRemoteHost)
+  ? { minVersion: 'TLSv1.2', rejectUnauthorized: false }
+  : undefined;
+
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '3306', 10),
@@ -12,7 +17,8 @@ const pool = mysql.createPool({
   connectionLimit: 15,
   queueLimit: 0,
   enableKeepAlive: true,
-  keepAliveInitialDelay: 0
+  keepAliveInitialDelay: 0,
+  ...(ssl && { ssl })
 });
 
 // Test connection on module load
